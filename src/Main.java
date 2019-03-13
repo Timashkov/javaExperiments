@@ -1,5 +1,7 @@
-import java.util.HashMap;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
+
+import static java.util.Arrays.asList;
 
 class RecursionExample {
 
@@ -55,6 +57,32 @@ public class Main {
     public static void main(String... args) {
         System.out.println("Started");
 
+        ArrayList<Integer> l = new ArrayList(Arrays.asList(1, 2, 3, 4, 5, 6));
+
+        for (Iterator<Integer> it = l.iterator(); it.hasNext(); ){
+            Integer o = it.next();
+
+            if (o == (Integer)2) {
+                it.remove();
+            }
+        }
+        for (Iterator<Integer> it = l.iterator(); it.hasNext(); ){
+            System.out.println(it.next());
+        }
+    }
+
+    private void runSteps() {
+        AtomicBoolean currentSide = new AtomicBoolean(false);
+        new Thread(new Foot("Left", currentSide)).start();
+        new Thread(new Foot("Right", currentSide)).start();
+    }
+
+    private void runRecursion() {
+        RecursionExample ex = new RecursionExample();
+        ex.inc();
+    }
+
+    private void memCheck(){
         Runtime rt = Runtime.getRuntime();
         long prevTotal = rt.totalMemory();
         long prevFree = rt.freeMemory();
@@ -70,16 +98,6 @@ public class Main {
         System.out.println("dUsed " + (used - (rt.totalMemory() - rt.freeMemory())));
         System.out.println("total " + rt.totalMemory());
         System.out.println("Test: " + sc.toString());
-    }
 
-    private void runSteps() {
-        AtomicBoolean currentSide = new AtomicBoolean(false);
-        new Thread(new Foot("Left", currentSide)).start();
-        new Thread(new Foot("Right", currentSide)).start();
-    }
-
-    private void runRecursion() {
-        RecursionExample ex = new RecursionExample();
-        ex.inc();
     }
 }
