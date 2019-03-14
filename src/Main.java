@@ -69,6 +69,9 @@ public class Main {
         for (Iterator<Integer> it = l.iterator(); it.hasNext(); ){
             System.out.println(it.next());
         }
+
+        LinkedHashMap<Integer, Integer> lhm=new LinkedHashMap<>();
+        lhm.put(1,1);
     }
 
     private void runSteps() {
